@@ -19,7 +19,7 @@ const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000','https://elegant-brigadeiros-b94f0f.netlify.app'],
     credentials:true,
 }));
 
