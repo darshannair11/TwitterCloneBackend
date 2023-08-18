@@ -10,6 +10,7 @@ const cors = require('cors');
 const cookieParser=require("cookie-parser");
 const bcrypt=require("bcryptjs");
 const localStrategy=require('passport-local').Strategy;
+const MongoStore = require('connect-mongo');
 const PORT=process.env.PORT || 8000;
 
 
@@ -26,6 +27,11 @@ app.use(session({
     secret: 'Our little secret',
     resave: true,
     saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl:process.env.DB_CONNECTION_STRING,
+        ttl: 14 * 24 * 60 * 60,
+        autoRemove: 'native'
+      })
   }));
 
 app.use(passport.initialize());
